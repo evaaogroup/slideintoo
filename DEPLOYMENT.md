@@ -112,4 +112,4 @@ Once deployed, your Slideintoo landing page will be live with:
 - ✅ SEO optimization
 - ✅ Beautiful interactions
 
-Your site will automatically update whenever you push changes to the main branch! 
+Your site will automatically update whenever you push changes to the master branch! 
