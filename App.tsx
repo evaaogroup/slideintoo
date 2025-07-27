@@ -6,6 +6,7 @@ import { TestimonialsSection } from "./components/TestimonialsSection";
 import { BookSlotSection } from "./components/BookSlotSection";
 import { Footer } from "./components/Footer";
 
+
 export default function App() {
   return (
     <div className="min-h-screen bg-background">
