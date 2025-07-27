@@ -14,8 +14,8 @@
 ### 2. Connect Your Local Repository
 
 ```bash
-# Add the remote repository (replace YOUR_USERNAME with your GitHub username)
-git remote add origin https://github.com/paaricit/slideintoo.git
+# Add the remote repository
+git remote add origin https://github.com/evaaogroup/slideintoo.git
 
 # Push your code to GitHub
 git branch -M main
@@ -55,7 +55,7 @@ npm run deploy
 
 Your site will be available at:
 ```
-https://paaricit.github.io/slideintoo
+https://evaaogroup.github.io/slideintoo
 ```
 
 ## 🔧 Configuration Files
@@ -65,7 +65,7 @@ Make sure to update the homepage in `package.json`:
 
 ```json
 {
-  "homepage": "https://paaricit.github.io/slideintoo"
+  "homepage": "https://evaaogroup.github.io/slideintoo"
 }
 ```
 
