@@ -24,6 +24,8 @@ export default defineConfig({
     // Ensure proper module format
     target: 'es2015',
     minify: 'terser',
+    // Ensure proper MIME types
+    assetsInlineLimit: 0,
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
