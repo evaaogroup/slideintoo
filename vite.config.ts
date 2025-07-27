@@ -14,9 +14,16 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
         },
+        // Ensure proper file extensions for GitHub Pages
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       },
     },
     chunkSizeWarningLimit: 1000,
+    // Ensure proper module format
+    target: 'es2015',
+    minify: 'terser',
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
