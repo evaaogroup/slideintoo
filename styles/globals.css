@@ -11,39 +11,167 @@
     background-color: #ffffff;
     color: #030213;
     scroll-behavior: smooth;
+    font-feature-settings: "kern" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer components {
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+  /* Apple-style fade in animations */
+  .apple-fade-in {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
+    animation: appleFadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
-  .animation-delay-200 {
-    animation-delay: 200ms;
+  .apple-fade-in-delay-1 {
+    animation-delay: 0.1s;
   }
 
-  .animation-delay-400 {
-    animation-delay: 400ms;
+  .apple-fade-in-delay-2 {
+    animation-delay: 0.2s;
   }
 
-  .animation-delay-600 {
-    animation-delay: 600ms;
+  .apple-fade-in-delay-3 {
+    animation-delay: 0.3s;
   }
 
-  .hover-lift {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  .apple-fade-in-delay-4 {
+    animation-delay: 0.4s;
   }
 
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  .apple-fade-in-delay-5 {
+    animation-delay: 0.5s;
+  }
+
+  /* Apple-style scale animations */
+  .apple-scale-in {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: appleScaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* Apple-style slide animations */
+  .apple-slide-up {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: appleSlideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* Apple-style hover effects */
+  .apple-hover {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .apple-hover:hover {
+    transform: scale(1.02);
+  }
+
+  .apple-hover-lift {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .apple-hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Apple-style button animations */
+  .apple-button {
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .apple-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .apple-button:hover::before {
+    left: 100%;
+  }
+
+  .apple-button:active {
+    transform: scale(0.98);
+  }
+
+  /* Apple-style parallax */
+  .apple-parallax {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Apple-style text animations */
+  .apple-text-reveal {
+    overflow: hidden;
+  }
+
+  .apple-text-reveal span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%);
+    animation: appleTextReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* Apple-style image animations */
+  .apple-image-reveal {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .apple-image-reveal img {
+    transform: scale(1.1);
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .apple-image-reveal:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Apple-style scroll-triggered animations */
+  .apple-on-scroll {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .apple-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes fadeIn {
+@keyframes appleFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appleScaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes appleSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appleTextReveal {
   to {
     opacity: 1;
     transform: translateY(0);
@@ -60,4 +188,22 @@ button:focus-visible,
 a:focus-visible {
   outline: 2px solid #030213;
   outline-offset: 2px;
+}
+
+/* Apple-style scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }

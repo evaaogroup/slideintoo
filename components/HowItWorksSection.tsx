@@ -1,7 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function HowItWorksSection() {
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const [visibleSteps, setVisibleSteps] = useState<boolean[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0');
+            setVisibleSteps(prev => {
+              const newSteps = [...prev];
+              newSteps[index] = true;
+              return newSteps;
+            });
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    document.querySelectorAll('.step-card').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const steps = [
     {
@@ -31,7 +53,7 @@ export function HowItWorksSection() {
     <section className="py-20 px-6 bg-muted/30">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl tracking-tight mb-4 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl tracking-tight mb-4 font-light apple-fade-in">
             Slide In, Meet, Repeat.
           </h2>
         </div>
@@ -40,31 +62,36 @@ export function HowItWorksSection() {
           {steps.map((step, index) => (
             <div 
               key={step.number} 
-              className="text-center group cursor-pointer"
+              className={`step-card text-center group cursor-pointer apple-on-scroll ${
+                visibleSteps[index] ? 'visible' : ''
+              }`}
+              data-index={index}
               onMouseEnter={() => setHoveredStep(index)}
               onMouseLeave={() => setHoveredStep(null)}
             >
-              <div className="mb-6 relative overflow-hidden rounded-2xl aspect-square hover-lift">
-                <picture>
-                  <source srcSet={step.webpImage} type="image/webp" />
-                  <img 
-                    src={step.image}
-                    alt={`Step ${step.number}: ${step.title}`}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                    width={400}
-                    height={400}
-                  />
-                </picture>
-                <div className="absolute top-4 left-4 w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-lg font-semibold transition-transform duration-200 group-hover:scale-110">
+              <div className="mb-6 relative overflow-hidden rounded-2xl aspect-square apple-hover-lift">
+                <div className="apple-image-reveal">
+                  <picture>
+                    <source srcSet={step.webpImage} type="image/webp" />
+                    <img 
+                      src={step.image}
+                      alt={`Step ${step.number}: ${step.title}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      width={400}
+                      height={400}
+                    />
+                  </picture>
+                </div>
+                <div className="absolute top-4 left-4 w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-lg font-medium transition-all duration-300 group-hover:scale-110">
                   {step.number}
                 </div>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-all duration-500"></div>
               </div>
-              <h3 className="text-xl mb-4 font-semibold transition-colors duration-200 group-hover:text-primary">
+              <h3 className="text-xl mb-4 font-medium transition-colors duration-300 group-hover:text-primary">
                 {step.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed font-light">
                 {step.description}
               </p>
             </div>

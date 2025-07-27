@@ -9,10 +9,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = "", variant = "default", size = "default", loading = false, children, ...props }, ref) => {
     const variants = {
-      default: "bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95",
-      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:scale-95",
-      outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground active:scale-95",
-      ghost: "hover:bg-accent hover:text-accent-foreground active:scale-95"
+      default: "bg-primary text-primary-foreground hover:bg-primary/90 active:scale-98",
+      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:scale-98",
+      outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground active:scale-98",
+      ghost: "hover:bg-accent hover:text-accent-foreground active:scale-98"
     };
 
     const sizes = {
@@ -22,7 +22,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       icon: "h-10 w-10"
     };
 
-    const classes = `inline-flex items-center justify-center rounded-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:pointer-events-none ${variants[variant]} ${sizes[size]} ${className}`;
+    const classes = `inline-flex items-center justify-center rounded-md transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:opacity-50 disabled:pointer-events-none ${variants[variant]} ${sizes[size]} ${className}`;
 
     return (
       <button className={classes} ref={ref} disabled={loading} {...props}>
